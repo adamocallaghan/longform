@@ -12,3 +12,34 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.card .card-title {
+    font-size: 18px !important;
+}
+
+.FlexboxBody {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.FlexboxMain {
+    flex: 1 0 auto;
+}
+
+.FlexboxRows {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Resizing source images */
+.GQ { width: 25%; float: right; }
+.Wired { width: 50%; float: right; }
+.Esquire { width: 35%; float: right; }
+.RollingStone { width: 32%; float: right; }
+.G2 { width: 12%; float: right; }
+.TheVerge { width: 40%; float: right; }
+.TheGuardian { width: 45%; float: right; }
+.NewYorker { width: 55%; float: right; }
+.Flavorwire { width: 35%; float: right; }
+.TheAtlantic { width: 35%; float: right; }

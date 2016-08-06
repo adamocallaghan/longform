@@ -23,3 +23,6 @@ iron:router
 sacha:spin
 fortawesome:fontawesome
 planettraining:material-design-icons
+easy:search
+anonyfox:scrape
+dougthwaites:jquery-match-height
