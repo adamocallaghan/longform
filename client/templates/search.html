@@ -11,6 +11,16 @@
 
             {{else}}
 
+            <div class="row" style="height: 100px">
+                <p>Select tags to filter...</p>
+                <select class="filters" style="display: block">
+                    {{#EasySearch.Each index=articlesIndex }}
+                    <option value="{{category}}">{{category}}</option>
+                    {{/EasySearch.Each}}
+                </select>
+                <hr>
+            </div>
+
             <div class="row FlexboxRows">
                 {{#EasySearch.Each index=articlesIndex }}
 

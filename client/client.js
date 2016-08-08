@@ -3,7 +3,18 @@ const Articles = new Mongo.Collection('articles'),
     ArticlesIndex = new EasySearch.Index({
         collection: Articles,
         fields: ['title'],
-        engine: new EasySearch.Minimongo()
+        engine: new EasySearch.Minimongo({
+            selector: function (searchObject, options, aggregation) {
+                var selector = this.defaultConfiguration().selector(searchObject, options, aggregation);
+
+                // filter for the category if set
+                if (options.search.props.category) {
+                    selector.category = options.search.props.category;
+                }
+
+                return selector;
+            }
+        })
     });
 
 // On Client
@@ -42,4 +53,25 @@ Template.navbar.onRendered(function () {
     Meteor.call('getTheAtlantic', function(error, result) {
         console.log('getting The Atlantic data - CLIENT');
     });
+});
+
+Template.search.events({
+    'change select': function (e) {
+        ArticlesIndex.getComponentMethods()
+            .addProps('category', $(e.target).val())
+        ;
+    }
+})
+
+Template.registerHelper('uniqueCats', function(categories){
+    var u = {}, a = [];
+    for(var i = 0, l = this.length; i < l; ++i){
+        if(u.hasOwnProperty(this[i])) {
+            continue;
+        }
+        a.push(this[i]);
+        u[this[i]] = 1;
+    }
+    console.log(a);
+    return a;
 });
