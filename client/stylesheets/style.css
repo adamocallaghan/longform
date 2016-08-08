@@ -17,6 +17,17 @@
     font-size: 18px !important;
 }
 
+.navbar {
+    position: relative;
+}
+@media only screen and (min-width: 601px) {
+    .brand-logo {
+        position: absolute;
+        left: 40%;
+        margin-left: -50px !important; /* 50% of your logo width */
+        display: block;
+    }
+}
 .FlexboxBody {
     display: flex;
     min-height: 100vh;

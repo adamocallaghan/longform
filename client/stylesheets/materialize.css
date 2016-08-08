@@ -4144,7 +4144,8 @@ nav .brand-logo.center {
     left: auto;
   }
   nav .brand-logo img {
-    width: 75%;
+    width: 100%;
+    padding-top: 7px;
   }
 }
 
@@ -4256,7 +4257,10 @@ nav .input-field label.active {
     height: 69px;
   }
   .brand-logo img {
-    width: 100%;
+    width: 75%;
+    padding-top: 4px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
