@@ -1,9 +1,10 @@
-// On Client and Server
+// On Client and Server... EasySearch setup
 const Articles = new Mongo.Collection('articles'),
     ArticlesIndex = new EasySearch.Index({
         collection: Articles,
         fields: ['title'],
         engine: new EasySearch.Minimongo({
+            // the following is set a 'facet search' on the results that filters them by the category selected by the user
             selector: function (searchObject, options, aggregation) {
                 var selector = this.defaultConfiguration().selector(searchObject, options, aggregation);
 
@@ -17,11 +18,12 @@ const Articles = new Mongo.Collection('articles'),
         })
     });
 
-// On Client
+// On Client... tells EasySearch which index to search
 Template.search.helpers({
         articlesIndex: () => ArticlesIndex
 });
 
+// Meteor calls to the server to get the actual articles
 Template.navbar.onRendered(function () {
     Meteor.call('getWired', function(error, result) {
         console.log('getting Wired.co.uk data - CLIENT');
@@ -55,6 +57,8 @@ Template.navbar.onRendered(function () {
     });
 });
 
+// When the 'select' box is changed add the property 'category' as the target value (e.g. "News" ... category="News")
+// EasySearch facet search (see above!) uses this property to filter the returned Minimongo collection
 Template.search.events({
     'change select': function (e) {
         ArticlesIndex.getComponentMethods()
@@ -63,6 +67,8 @@ Template.search.events({
     }
 })
 
+/* Going to use the following Global Helper to transform the entire
+list of all categories into a list of unique categories */
 Template.registerHelper('uniqueCats', function(categories){
     var u = {}, a = [];
     for(var i = 0, l = this.length; i < l; ++i){

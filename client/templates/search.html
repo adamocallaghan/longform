@@ -11,16 +11,21 @@
 
             {{else}}
 
+            <!-- 'categories' selection -->
             <div class="row" style="height: 100px">
                 <p>Select tags to filter...</p>
                 <select class="filters" style="display: block">
                     {{#EasySearch.Each index=articlesIndex }}
+                        <!-- using EasySearch 'each' to populated the actual list of categories -->
                     <option value="{{category}}">{{category}}</option>
                     {{/EasySearch.Each}}
                 </select>
                 <hr>
             </div>
+            <!-- /'categories' -->
 
+            <!-- Why is Flexbox used here? This is the best way I found to ensure that
+            the rows of search results assume the same height... it works great! -->
             <div class="row FlexboxRows">
                 {{#EasySearch.Each index=articlesIndex }}
 

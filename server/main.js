@@ -4,7 +4,7 @@ Meteor.startup(() => {
   // code to run on server at startup
 });
 
-// On Client and Server
+// On Client and Server... EasySearch setup...
 const Articles = new Mongo.Collection('articles'),
     ArticlesIndex = new EasySearch.Index({
         collection: Articles,
@@ -12,6 +12,8 @@ const Articles = new Mongo.Collection('articles'),
         engine: new EasySearch.Minimongo()
     });
 
+// These methods are called client-side and do the business of retrieving the actual articles from RSS feeds
+// I will be moving this to a cron-job at some point, after testing, etc, is finished and I'm ready to deploy
 Meteor.methods({
     'getWired': function(){
         Articles.remove({});
