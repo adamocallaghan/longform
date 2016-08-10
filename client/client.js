@@ -18,6 +18,8 @@ const Articles = new Mongo.Collection('articles'),
         })
     });
 
+const Categories = new Mongo.Collection('categories');
+
 // On Client... tells EasySearch which index to search
 Template.search.helpers({
         articlesIndex: () => ArticlesIndex
@@ -64,7 +66,19 @@ Template.search.events({
         ArticlesIndex.getComponentMethods()
             .addProps('category', $(e.target).val())
         ;
+    },
+    /*
+    'click .animate_me': function(){
+        $('.wrap, a').toggleClass('active');
+
+        return false;
+    },
+    'click #close': function(){
+        $('.wrap, a').removeClass('active');
+
+        return false;
     }
+    */
 })
 
 /* Going to use the following Global Helper to transform the entire
@@ -80,4 +94,14 @@ Template.registerHelper('uniqueCats', function(categories){
     }
     console.log(a);
     return a;
+});
+
+Template.search.helpers({
+    category_list: function () {
+        // The following returns only distinct/unique categories from the Categories collection (for the categories dropdown)
+        var distinctEntries = _.uniq(Categories.find({}, {sort: {category:1}, fields: {category:true}}).fetch().map(function(x) {
+            return x.category;
+        }), true);
+        return distinctEntries;
+    }
 });

@@ -12,11 +12,14 @@ const Articles = new Mongo.Collection('articles'),
         engine: new EasySearch.Minimongo()
     });
 
+const Categories = new Mongo.Collection('categories');
+
 // These methods are called client-side and do the business of retrieving the actual articles from RSS feeds
 // I will be moving this to a cron-job at some point, after testing, etc, is finished and I'm ready to deploy
 Meteor.methods({
     'getWired': function(){
         Articles.remove({});
+        Categories.remove({});
         console.log('getting Wired.co.uk data - SERVER');
         feedData = Scrape.feed("http://www.wired.com/feed/");
         //console.log(feedData.items);
@@ -27,6 +30,7 @@ Meteor.methods({
             articleCategory = feedData.items[i].tags[0];
             articleVendor = "Wired";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getGQ': function(){
@@ -41,6 +45,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "GQ";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getEsquire': function(){
@@ -55,6 +60,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "Esquire";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getRollingStone': function(){
@@ -69,6 +75,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "RollingStone";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getG2': function(){
@@ -83,6 +90,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "G2";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getTheVerge': function(){
@@ -97,6 +105,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "TheVerge";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getTheGuardian': function(){
@@ -111,6 +120,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "TheGuardian";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getNewYorker': function(){
@@ -125,6 +135,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "NewYorker";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getFlavorwire': function(){
@@ -139,6 +150,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "Flavorwire";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     },
     'getTheAtlantic': function(){
@@ -153,6 +165,7 @@ Meteor.methods({
             //console.log(articleCategory);
             articleVendor = "TheAtlantic";
             Articles.insert({ title: articleTitle, link: articleLink, description: articleDesc, category: articleCategory, source: articleVendor });
+            Categories.insert({ category: articleCategory });
         }
     }
 });

@@ -15,10 +15,10 @@
             <div class="row" style="height: 100px">
                 <p>Select tags to filter...</p>
                 <select class="filters" style="display: block">
-                    {{#EasySearch.Each index=articlesIndex }}
+                    {{#each category_list}}
                         <!-- using EasySearch 'each' to populated the actual list of categories -->
-                    <option value="{{category}}">{{category}}</option>
-                    {{/EasySearch.Each}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
                 </select>
                 <hr>
             </div>
@@ -28,7 +28,7 @@
             the rows of search results assume the same height... it works great! -->
             <div class="row FlexboxRows">
                 {{#EasySearch.Each index=articlesIndex }}
-
+                    <!-- Card -->
                     <div class="col s12 m6">
                         <div class="card blue-grey darken-2">
                             <div class="card-content white-text">
