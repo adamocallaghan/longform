@@ -16,7 +16,7 @@
                 <p>Select tags to filter...</p>
                 <select class="filters" style="display: block">
                     {{#each category_list}}
-                        <!-- using EasySearch 'each' to populated the actual list of categories -->
+                        <!-- looping through categories with helper -->
                     <option value="{{this}}">{{this}}</option>
                     {{/each}}
                 </select>

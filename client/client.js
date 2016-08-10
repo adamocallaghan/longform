@@ -26,6 +26,7 @@ Template.search.helpers({
 });
 
 // Meteor calls to the server to get the actual articles
+/*
 Template.navbar.onRendered(function () {
     Meteor.call('getWired', function(error, result) {
         console.log('getting Wired.co.uk data - CLIENT');
@@ -58,6 +59,7 @@ Template.navbar.onRendered(function () {
         console.log('getting The Atlantic data - CLIENT');
     });
 });
+*/
 
 // When the 'select' box is changed add the property 'category' as the target value (e.g. "News" ... category="News")
 // EasySearch facet search (see above!) uses this property to filter the returned Minimongo collection
@@ -80,21 +82,6 @@ Template.search.events({
     }
     */
 })
-
-/* Going to use the following Global Helper to transform the entire
-list of all categories into a list of unique categories */
-Template.registerHelper('uniqueCats', function(categories){
-    var u = {}, a = [];
-    for(var i = 0, l = this.length; i < l; ++i){
-        if(u.hasOwnProperty(this[i])) {
-            continue;
-        }
-        a.push(this[i]);
-        u[this[i]] = 1;
-    }
-    console.log(a);
-    return a;
-});
 
 Template.search.helpers({
     category_list: function () {
